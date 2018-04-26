@@ -131,8 +131,9 @@ class Parser(object):
         if context.vocab:
             dataset.bind(None, context.vocab)
         for name, term in context.terms.items():
-            if term.id and term.id.endswith(VOCAB_DELIMS):
-                dataset.bind(name, term.id)
+            if type(term.id) != float:
+                if term.id and term.id.endswith(VOCAB_DELIMS):
+                    dataset.bind(name, term.id)
 
         graph = dataset.default_context if dataset.context_aware else dataset
 

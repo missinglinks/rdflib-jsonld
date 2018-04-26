@@ -259,6 +259,8 @@ class Context(object):
     def _rec_expand(self, source, expr, prev=None):
         if expr == prev or expr in NODE_KEYS:
             return expr
+        if type(expr) == float:
+            return expr
         is_term, pfx, nxt = self._prep_expand(expr)
         if pfx:
             iri = self._get_source_id(source, pfx) or self.expand(pfx)
